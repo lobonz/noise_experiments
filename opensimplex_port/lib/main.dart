@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:opensimplex_port/open_simplex2d.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 
 class OpenSimplexDemo extends StatelessWidget {
-  static const int width = 512;
-  static const int height = 512;
+  static const int width = 100;
+  static const int height = 100;
   static const double frequency = 1.0 / 24.0;
   static const int seed = 0;
 
@@ -36,9 +37,11 @@ class OpenSimplexDemo extends StatelessWidget {
 
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
-        double value =
-            noise3_ImproveXY(seed, x * frequency, y * frequency, 0.0);
+        // double value = noise3_ImproveXY(seed, x * frequency, y * frequency, 0.0);
+        double value = OpenSimplex2S()
+            .noise3ImproveXY(seed, x * frequency, y * frequency, 0.0);
         int grayscale = ((value + 1) * 127.5).toInt();
+        print(value);
         int rgb = 0xFF000000 | (grayscale << 16) | (grayscale << 8) | grayscale;
         paint.color = Color(rgb);
         canvas.drawRect(Rect.fromLTWH(x.toDouble(), y.toDouble(), 1, 1), paint);
