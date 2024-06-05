@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,6 +10,8 @@ class OpenSimplexDemo extends StatelessWidget {
   static const int height = 512;
   static const double frequency = 1.0 / 24.0;
   static const int seed = 0;
+
+  const OpenSimplexDemo({super.key});
 
   Future<void> generateNoiseImage() async {
     final ByteData byteData = await rootBundle.load('assets/noise.png');
